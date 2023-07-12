@@ -7,7 +7,7 @@ Button to reset
 Button to change grid size
 */
 
-generateGrid(16, 16);
+generateGrid(100, 100);
 
 function generateGrid(rows, columns) {
     const canvas = document.querySelector('body');
@@ -26,7 +26,5 @@ function generateGrid(rows, columns) {
 const boxes = document.querySelectorAll('.item');
 boxes.forEach(box => box.addEventListener(
     'mouseover',
-    () => box.classList = 'fill',
-    {once: true}
-    )
-);
+    () => box.classList.add('fill')
+));

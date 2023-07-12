@@ -12,14 +12,21 @@ generateGrid(16, 16);
 function generateGrid(rows, columns) {
     const canvas = document.querySelector('body');
     for (let i = 0; i < rows; i++) {
-        console.log(i);
         const newRow = document.createElement('div');
         newRow.classList = 'row';
         canvas.appendChild(newRow);
         for (let j = 0; j < columns; j++) {
-            console.log(j);
             const newItem = document.createElement('div');
+            newItem.classList = 'item';
             newRow.appendChild(newItem);
         }
     }
 }
+
+const boxes = document.querySelectorAll('.item');
+boxes.forEach(box => box.addEventListener(
+    'mouseover',
+    () => box.classList = 'fill',
+    {once: true}
+    )
+);

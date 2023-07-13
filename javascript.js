@@ -1,16 +1,8 @@
-/*
-User should be able to hover over grid squares to change its colour
+generateGrid();
 
-Grid generation
-Colour change on hover
-Button to reset
-Button to change grid size
-*/
-
-generateGrid(100, 100);
-
-function generateGrid(rows, columns) {
-    const canvas = document.querySelector('body');
+function generateGrid(rows = 5, columns = 5) {
+    deleteGrid();
+    const canvas = document.querySelector('#grid-container');
     for (let i = 0; i < rows; i++) {
         const newRow = document.createElement('div');
         newRow.classList = 'row';
@@ -21,10 +13,33 @@ function generateGrid(rows, columns) {
             newRow.appendChild(newItem);
         }
     }
+    const boxes = document.querySelectorAll('.item');
+    boxes.forEach(box => box.addEventListener(
+        'mouseover',
+        () => box.classList.add('fill')
+    ));
 }
 
-const boxes = document.querySelectorAll('.item');
-boxes.forEach(box => box.addEventListener(
-    'mouseover',
-    () => box.classList.add('fill')
-));
+function askUser() {
+    rows = prompt('How many rows?');
+    columns = prompt('How many columns?');
+    const boxes = document.querySelectorAll('.item');
+    generateGrid(rows, columns)
+}
+
+function resetGrid() {
+    const boxes = document.querySelectorAll('.item');
+    boxes.forEach(box => box.classList.remove('fill'));
+}
+
+function deleteGrid() {
+    const canvas = document.querySelector('#grid-container');
+    const rows = document.querySelectorAll('.row');
+    rows.forEach(row => canvas.removeChild(row));
+}
+
+const btnReset =  document.querySelector('#grid-reset');
+btnReset.addEventListener('click', resetGrid);
+
+const btnSettings = document.querySelector('#grid-settings');
+btnSettings.addEventListener('click', askUser);
